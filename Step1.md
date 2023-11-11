@@ -1,88 +1,98 @@
-### Channels テーブルのカラム
-
-| Field        | Type         | Null | Key | Default | Extra          |
-| ------------ | ------------ | ---- | --- | ------- | -------------- |
-| channel_id   | int          | NO   | PRI | NULL    | auto_increment |
-| channel_name | varchar(255) | NO   |     | NULL    |                |
-
-<br>
-<br>
-
-
 ### Episodes テーブルのカラム
 
-| Field          | Type         | Null | Key | Default | Extra          |
-| -------------- | ------------ | ---- | --- | ------- | -------------- |
-| episode_id     | int          | NO   | PRI | NULL    | auto_increment |
-| season_id      | int          | YES  | MUL | NULL    |                |
-| episode_number | int          | NO   |     | NULL    |                |
-| title          | varchar(255) | NO   |     | NULL    |                |
-| description    | text         | NO   |     | NULL    |                |
-| video_duration | time         | YES  |     | NULL    |                |
-| release_date   | date         | YES  |     | NULL    |                |
+| カラム名         | データ型       | NULL  | キー      | 初期値           | AUTO INCREMENT  |
+|------------------|--------------|-------|---------|------------------|------------------|
+| episode_id       | bigint(20)   |       |         | PRIMARY          | YES              |
+| season_id        | bigint(20)   |       |         |                  |                  |
+| episode_number   | int(11)      |       |         |                  |                  |
+| title            | varchar(255) |       |         |                  |                  |
+| description      | text         |       |         |                  |                  |
+| video_duration   | time         |       |         |                  |                  |
+| release_date     | date         |       |         |                  |                  |
 
 ・外部キー制約： season_idに対して、Seasonsテーブルの id カラムから設定
 
 <br>
 <br>
 
-### Genres テーブルのカラム
+### Seasons テーブルのカラム
 
-| Field      | Type         | Null | Key | Default | Extra          |
-| ---------- | ------------ | ---- | --- | ------- | -------------- |
-| genre_id   | int          | NO   | PRI | NULL    | auto_increment |
-| genre_name | varchar(255) | NO   |     | NULL    |                |
+| カラム名         | データ型       | NULL  | キー      | 初期値           | AUTO INCREMENT  |
+|------------------|--------------|-------|---------|------------------|------------------|
+| season_id        | bigint(20)   |       |         | PRIMARY          | YES              |
+| show_id          | bigint(20)   |       |         |                  |                  |
+| season_number    | int(11)      |       |         |                  |                  |
+| title            | varchar(255) |       |         |                  |                  |
+
+・外部キー制約： show_idに対して、Showsテーブルの id カラムから設定
 
 <br>
 <br>
 
 ### Shows テーブルのカラム
 
-| Field       | Type         | Null | Key | Default | Extra          |
-| ----------- | ------------ | ---- | --- | ------- | -------------- |
-| show_id     | int          | NO   | PRI | NULL    | auto_increment |
-| genre_id    | int          | YES  | MUL | NULL    |                |
-| title       | varchar(255) | NO   |     | NULL    |                |
-| description | text         | NO   |     | NULL    |                |
+| カラム名      | データ型       | NULL  | キー      | 初期値  | AUTO INCREMENT  |
+|--------------|--------------|-------|---------|--------|------------------|
+| show_id      | bigint(20)   |       |         |        | PRIMARY          |
+| title        | varchar(255) |       |         |        |                  |
+| description  | varchar(255) |       |         |        |                  |
+| channel_id   | bigint(20)   |       |         |        |                  |
+
+・外部キー制約： channel_idに対して、Channelsテーブルの id カラムから設定
 
 <br>
 <br>
+
+### Channels テーブルのカラム
+
+| カラム名      | データ型   | NULL  | キー      | 初期値  |
+|--------------|----------|-------|---------|--------|
+| channel_id   | int(11)  |       |         |        |
+| genre_id     | int(11)  |       |         |        |
+| channel_name | varchar(255) |       |         |        |
+
+・外部キー制約： genre_idに対して、Genresテーブルの id カラムから設定
+
+<br>
+<br>
+
+### Genres テーブルのカラム
+
+| カラム名    | データ型   | NULL  | キー      | 初期値  |
+|------------|----------|-------|---------|--------|
+| genre_id   | int(11)  |       | PRIMARY |        |
+| genre_name | varchar(255) |       |         |        |
+
+
+<br>
+<br>
+
 
 ### TimeSlots テーブルのカラム
 
-| Field        | Type     | Null | Key | Default | Extra          |
-| ------------ | -------- | ---- | --- | ------- | -------------- |
-| time_slot_id | int      | NO   | PRI | NULL    | auto_increment |
-| channel_id   | int      | YES  | MUL | NULL    |                |
-| start_time   | datetime | NO   |     | NULL    |                |
-| end_time     | datetime | NO   |     | NULL    |                |
+| カラム名      | データ型       | NULL  | キー      | 初期値  | AUTO INCREMENT  |
+|--------------|--------------|-------|---------|--------|------------------|
+| time_slot_id | bigint(20)   |       |         |        | PRIMARY          |
+| start_time   | datetime     |       |         |        |                  |
+| end_time     | datetime     |       |         |        |                  |
+| episode_id   | bigint(20)   |       |         |        |                  |
+| channel_id   | bigint(20)   |       |         |        |                  |
+
 
 ・外部キー制約： channel_idに対して、Channelsテーブルの id カラムから設定
-<br>
-<br>
+・外部キー制約： episode_idに対して、Episodesテーブルの id カラムから設定
 
-
-### Seasons テーブルのカラム
-
-| Field         | Type         | Null | Key | Default | Extra          |
-| ------------- | ------------ | ---- | --- | ------- | -------------- |
-| season_id     | int          | NO   | PRI | NULL    | auto_increment |
-| show_id       | int          | YES  | MUL | NULL    |                |
-| season_number | int          | NO   |     | NULL    |                |
-| title         | varchar(255) | NO   |     | NULL    |                |
-
-・外部キー制約： show_idに対して、Showsテーブルの id カラムから設定
 <br>
 <br>
 
 ### Viewership テーブル
 
-| カラム名        | データ型          | NULL  | キー         | 初期値           | AUTO_INCREMENT |
-| --------------- | ---------------- | ----- | ----------- | ----------------- | -------------- |
-| viewership_id   | INT              |        | PRIMARY KEY |                   | YES            |
-| episode_id      | INT              |       |             |                   |                |
-| time_slot_id    | INT              |       |             |                   |                |
-| viewership_count| INT              |       |             |                   |                |
+| カラム名          | データ型       | NULL  | キー      | 初期値  | AUTO INCREMENT  |
+|------------------|--------------|-------|---------|--------|------------------|
+| viewership_id    | bigint(20)   |       |         |        | PRIMARY          |
+| episode_id       | bigint(20)   |       |         |        |                  |
+| time_slot_id     | bigint(20)   |       |         |        |                  |
+| viewership_count | int(11)      |       |         |        |                  |
 
 ・外部キー制約： episode_idに対して、Episodesテーブルの id カラムから設定
 ・外部キー制約： time_slot_idに対して、TimeSlotsテーブルの id カラムから設定

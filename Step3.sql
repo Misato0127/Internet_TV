@@ -7,6 +7,9 @@ INNER JOIN Episodes ON Viewership.episode_id = Episodes.episode_id
 ORDER BY Viewership.viewership_count DESC
 LIMIT 3;
 
+
+
+
 -- 2. エピソード視聴数トップ3の番組タイトル、シーズン数、エピソード数、エピソードタイトル、視聴数を取得
 SELECT
     Shows.title AS 番組タイトル,
@@ -22,6 +25,10 @@ FROM
 ORDER BY
     Viewership.viewership_count DESC
 LIMIT 3;
+
+
+
+
 
 -- 3. 本日放送される全ての番組に対して、チャンネル名、放送開始時刻(日付+時間)、放送終了時刻、シーズン数、エピソード数、エピソードタイトル、エピソード詳細を取得してください。 *番組の開始時刻が本日のものを本日方法される番組とみなすものとします
 SELECT
@@ -42,6 +49,10 @@ WHERE
   DATE(TimeSlots.start_time) = '2023-01-01'
 ORDER BY
   TimeSlots.start_time;
+
+
+
+
 
 -- 4. 一つのチャンネルに対して、放送開始時刻、放送終了時刻、シーズン数、エピソード数、エピソードタイトル、エピソード詳細を本日から一週間分取得してください
 
@@ -66,6 +77,10 @@ WHERE
 ORDER BY
     TimeSlots.start_time;
 
+
+
+
+
 -- 5. 直近一週間に放送された番組の中で、エピソード視聴数合計トップ2の番組に対して、番組タイトル、視聴数を取得してください
 
 SELECT
@@ -87,6 +102,11 @@ GROUP BY
 ORDER BY
     total_viewership DESC
 LIMIT 2;
+
+
+
+
+
 
 -- 6. ジャンルごとに視聴数トップの番組に対して、ジャンル名、番組タイトル、エピソード平均視聴数を取得してください
 SELECT
